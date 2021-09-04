@@ -13,7 +13,7 @@ The examples are in **Python** and **Rust**, one folder for each
 inside which there are files with one example each for **global** and **guild**
 slash commands.
 
-$
+```
 ├── python/                                        
 │   │   ├── get_commands.py/    
 │   |   ├── register_commands.py/                                                       
@@ -24,3 +24,4 @@ $
 │   |── Cargo.lock 
 |   |── Cargo.toml          
 └── README.md
+```
