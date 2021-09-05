@@ -14,7 +14,7 @@ The examples are in **Python** and **Rust**, one folder for each
 inside which there are files with one example each for **global** and **guild**
 scoped slash commands.
 
-```py
+```
 ├── python/                                        
 │   │   ├── get_commands.py/    
 │   |   ├── register_commands.py/                                                       
