@@ -14,15 +14,17 @@ JSON body format
                 "name": "",
                 "value": ""
             ],
-            "options": [same format here, basically recursion of sub commands]
+            "options": [same format here]
 
         }
     ],
     "default_permission": True,
 }
 
-'type' (only in base command), 'default_permission' and 'required' fields
-are optional and have the default values as shown in the example.
+'type' (only in base command), 'default_permission', 'required' and 'options' 
+fields are optional and have the default values as shown in the example.
+'options' field can be used to create sub commands which isn't mandatory and 'type'
+inside options is required to define what kind of option is it (usually a subcommand with value 1)
 
 There are 3 'types' for the actual base command: 
 https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-types
@@ -40,21 +42,8 @@ HEADERS = {"Authorization": f"Bot {TOKEN}"}
 
 # No fields with default values are used
 EXAMPLE_COMMAND = {
-
     "name": "pyfact",
     "description": "Shows a random Python fact!",
-    "options": [
-        {
-            "type": 1,
-            "name": "snake",
-            "description": "Facts related to Python snake.",
-        },
-        {
-            "type": 1,
-            "name": "language",
-            "description": "Facts related to Python language.",
-        }
-    ],
 }
 
 
