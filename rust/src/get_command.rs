@@ -1,6 +1,9 @@
 /*
-This is to get all commands, not to be confused with `get_command.rs` 
-which returns details of a particular command.
+To update a slash command, use the same format, only difference being instead of 
+`delete` request, use `put` request with the json body of your updated command!
+
+Remember that this is a `put` request which means you would need to
+send your entire command with the change again, not only the little change which you wanted.
 */
 
 use reqwest;
@@ -15,16 +18,17 @@ lazy_static! {
 }
 
 #[allow(dead_code)]
-pub async fn get_global_commands(application_id: i64) 
+pub async fn get_global_command(application_id: i64, command_id: i64) 
     -> Result<(), Box<dyn std::error::Error>> {
     /*
-    https://discord.com/developers/docs/interactions/application-commands#get-global-application-commands
-    Get globally registered slash commands.
+    https://discord.com/developers/docs/interactions/application-commands#get-global-application-command
+    Get a globally registered slash command.
     Takes the application(bot) ID as a single arguments.
     */
 
-    let url: String = format!("https://discord.com/api/v9/applications/{}/commands", 
-                            application_id);
+    let url: String = format!("https://discord.com/api/v9/applications/{}/commands/{}", 
+                            application_id, 
+                            command_id);
 
     let res = reqwest::Client::new()
         .get(url)
@@ -41,17 +45,18 @@ pub async fn get_global_commands(application_id: i64)
 }
 
 #[allow(dead_code)]
-pub async fn get_guild_commands(application_id: i64, guild_id:i64) 
+pub async fn get_guild_command(application_id: i64, guild_id:i64, command_id: i64) 
     -> Result<(), Box<dyn std::error::Error>> {
     /*
-    https://discord.com/developers/docs/interactions/application-commands#get-guild-application-commands
-    Get guild specfic registered slash commands.
+    https://discord.com/developers/docs/interactions/application-commands#get-guild-application-command
+    Get a guild specfic registered slash command.
     Takes the application (bot) ID and guild ID respectively as arguments.
     */
 
-    let url: String = format!("https://discord.com/api/v9/applications/{}/guilds/{}/commands", 
+    let url: String = format!("https://discord.com/api/v9/applications/{}/guilds/{}/commands/{}", 
                             application_id, 
-                            guild_id);
+                            guild_id, 
+                            command_id);
     
     let res = reqwest::Client::new()
         .get(url)

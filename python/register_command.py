@@ -47,7 +47,7 @@ EXAMPLE_COMMAND = {
 }
 
 
-def register_global_commands(application_id: int) -> str:
+def register_global_command(application_id: int) -> str:
     """
     https://discord.com/developers/docs/interactions/application-commands#create-global-application-command
     Register slash commands globally.
@@ -60,11 +60,11 @@ def register_global_commands(application_id: int) -> str:
     return (
         f"Response code: {res.status_code}\n"
         f"Total commands: {len(res.json())}\n"
-        f"JSON text: {res.json()}"
+        f"JSON text: {res.json()}\n"
     )
 
 
-def register_guild_commands(application_id: int, guild_id: int) -> str:
+def register_guild_command(application_id: int, guild_id: int) -> str:
     """
     https://discord.com/developers/docs/interactions/application-commands#create-global-application-command
     Register slash commands to specific guilds.
@@ -77,9 +77,9 @@ def register_guild_commands(application_id: int, guild_id: int) -> str:
     return (
         f"Response code: {res.status_code}\n"
         f"Total commands: {len(res.json())}\n"
-        f"JSON text: {res.json()}"
+        f"JSON text: {res.json()}\n"
     )
 
 
-# print(register_global_commands(792731230360961035))
-# print(register_guild_commands(792731230360961035, 870330763772563476))
+# print(register_global_command(884099662653562961))
+# print(register_guild_command(884099662653562961, 845726630231932980))

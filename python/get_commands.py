@@ -1,3 +1,8 @@
+"""
+This is to get all commands, not to be confused with `get_command.py` 
+which returns details of a particular command.
+"""
+
 import os
 import requests
 
@@ -18,13 +23,13 @@ def get_global_commands(application_id: int) -> str:
     return (
         f"Response code: {res.status_code}\n"
         f"Total commands: {len(res.json())}\n"
-        f"JSON text: {res.json()}"
+        f"JSON text: {res.json()}\n"
     )
 
 
 def get_guild_commands(application_id: int, guild_id: int) -> str:
     """
-    https://discord.com/developers/docs/interactions/application-commands#get-guild-application-command
+    https://discord.com/developers/docs/interactions/application-commands#get-guild-application-commands
     Get guild specfic registered slash commands.
     Takes the application (bot) ID and guild ID respectively as arguments.
     """
@@ -35,9 +40,9 @@ def get_guild_commands(application_id: int, guild_id: int) -> str:
     return (
         f"Response code: {res.status_code}\n"
         f"Total commands: {len(res.json())}\n"
-        f"JSON text: {res.json()}"
+        f"JSON text: {res.json()}\n"
     )
 
 
-# print(get_global_commands(792731230360961035))
-# print(get_guild_commands(792731230360961035, 870330763772563476))
+# print(get_global_commands(884099662653562961))
+# print(get_guild_commands(884099662653562961, 845726630231932980))

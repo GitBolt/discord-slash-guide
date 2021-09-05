@@ -1,8 +1,3 @@
-/*
-This is to get all commands, not to be confused with `get_command.rs` 
-which returns details of a particular command.
-*/
-
 use reqwest;
 use serde_json;
 use std::env;
@@ -15,19 +10,19 @@ lazy_static! {
 }
 
 #[allow(dead_code)]
-pub async fn get_global_commands(application_id: i64) 
+pub async fn delete_global_command(application_id: i64, command_id: i64) 
     -> Result<(), Box<dyn std::error::Error>> {
     /*
-    https://discord.com/developers/docs/interactions/application-commands#get-global-application-commands
-    Get globally registered slash commands.
+    https://discord.com/developers/docs/interactions/application-commands#delete-global-application-command
+    Delete a globally registered slash command.
     Takes the application(bot) ID as a single arguments.
     */
 
-    let url: String = format!("https://discord.com/api/v9/applications/{}/commands", 
-                            application_id);
-
+    let url: String = format!("https://discord.com/api/v9/applications/{}/commands/{}", 
+                            application_id, 
+                            command_id);
     let res = reqwest::Client::new()
-        .get(url)
+        .delete(url)
         .header("Authorization", format!("Bot {}", *TOKEN))
         .send()
         .await?
@@ -41,20 +36,20 @@ pub async fn get_global_commands(application_id: i64)
 }
 
 #[allow(dead_code)]
-pub async fn get_guild_commands(application_id: i64, guild_id:i64) 
+pub async fn delete_guild_command(application_id: i64, guild_id: i64, command_id: i64) 
     -> Result<(), Box<dyn std::error::Error>> {
     /*
-    https://discord.com/developers/docs/interactions/application-commands#get-guild-application-commands
-    Get guild specfic registered slash commands.
+    https://discord.com/developers/docs/interactions/application-commands#delete-guild-application-command
+    Delete a guild specfic registered slash command.
     Takes the application (bot) ID and guild ID respectively as arguments.
     */
 
-    let url: String = format!("https://discord.com/api/v9/applications/{}/guilds/{}/commands", 
+    let url: String = format!("https://discord.com/api/v9/applications/{}/guilds/{}/commands/{}", 
                             application_id, 
-                            guild_id);
-    
+                            guild_id, 
+                            command_id);
     let res = reqwest::Client::new()
-        .get(url)
+        .delete(url)
         .header("Authorization", format!("Bot {}", *TOKEN))
         .send()
         .await?

@@ -52,7 +52,7 @@ const EXAMPLE_COMMAND: &str = r#"{
     }"#;
     
 #[allow(dead_code)]
-pub async fn register_global_commands(application_id: i64) 
+pub async fn register_global_command(application_id: i64) 
     -> Result<(), Box<dyn std::error::Error>> {
     /*
     https://discord.com/developers/docs/interactions/application-commands#create-global-application-command
@@ -80,7 +80,7 @@ pub async fn register_global_commands(application_id: i64)
 
 
 #[allow(dead_code)]
-pub async fn register_guild_commands(application_id: i64, guild_id: i64) 
+pub async fn register_guild_command(application_id: i64, guild_id: i64) 
     -> Result<(), Box<dyn std::error::Error>> {
     /*
     https://discord.com/developers/docs/interactions/application-commands#create-global-application-command

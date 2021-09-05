@@ -15,13 +15,15 @@ inside which there are files with one example each for **global** and **guild**
 scoped slash commands.
 
 ```
-├── python/                                        
+├── python/    
+│   |   ├── delete_commands.py/                                                       
 │   │   ├── get_commands.py/    
 │   |   ├── register_commands.py/                                                       
 ├── rust/
 │   ├── src/     
-│   │   ├── main.rs/              'Main entry point, functions are called here'                                             
+│   │   ├── delete_commands.rs/  
 │   │   ├── get_commands.rs/  
+│   │   ├── main.rs/             'Main entry point, functions are called here'                                             
 │   │   ├── register_commands.rs/  
 │   |── Cargo.lock 
 |   |── Cargo.toml          
