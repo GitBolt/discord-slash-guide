@@ -29,3 +29,14 @@ scoped slash commands.
 |   |── Cargo.toml          
 └── README.md
 ```
+
+### Working locally
+Make sure to replace the example IDs when calling functions with yours.
+#### Python
+You should have `requests` module installed in order to test the functions. <br>
+For the server, install the required packages from `requirements.txt` file
+#### Rust
+Just do `cargo run`
+#### Environment variables
+`TOKEN= ...` (You bot's token)
+`PUBLIC_KEY= ...`(Your application public key from developer portal)
