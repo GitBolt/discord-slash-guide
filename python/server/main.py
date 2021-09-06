@@ -1,15 +1,21 @@
 import os
-from typing import Union
 from nacl.signing import VerifyKey
-from fastapi import FastAPI, Request, HTTPException
 from nacl.exceptions import BadSignatureError
-from starlette.responses import JSONResponse
-
-# Your public key can be found on your application in the Developer Portal
-PUBLIC_KEY = os.environ["PUBLIC_KEY"]
+from fastapi import FastAPI, Request, HTTPException
+from starlette.responses import JSONResponse, Response
 
 app = FastAPI()
+# Your public key can be found on your application in the Developer Portal
+PUBLIC_KEY = os.environ["PUBLIC_KEY"]
+EXAMPLE_RESPONSE = {
+    "type": 4,
+    "data":{
+        "content": "Successfully received command",
+        "flags": 1
+    }
+}
 
+# Simple function to verify request sent from Discord
 def verify_key(signature: str, timestamp: str, body: str) -> bool:
     print(timestamp)
     print(signature)
@@ -31,18 +37,24 @@ async def index() -> JSONResponse:
         content={"Message": "Welcome to interaction webhook server"}
         )
         
-        
+            
 @app.post("/interactions")
-async def index(request: Request) -> Union[JSONResponse, HTTPException]:
+async def interactions(request: Request) -> Response:
     
     signature = request.headers["X-Signature-Ed25519"]
     timestamp = request.headers["X-Signature-Timestamp"]
-    body = request.body.decode("utf-8")
-
+    body = await request.body()
+    body = body.decode("utf-8")
+       
     if verify_key(signature, timestamp, body):
-        return JSONResponse(status_code=200, content=request.json())
+
+        json_body = await request.json()
+
+        if json_body["type"] == 1:
+            return {"type": 1} # Ack ping
+        else:
+            return EXAMPLE_RESPONSE # If not ping, send example response
     else:
         return HTTPException(
             status_code=401, detail={"error": "Incorrect request"}
         )
-
